@@ -24,4 +24,9 @@ public class SurveyResponsesController {
     public Iterable<SurveyResponses> addSurveyResponse(@RequestBody AddSurveyResponsesDTO request){
         return this.service.addSurveyResponse(request);
     }
+
+    @PutMapping
+    public Iterable<SurveyResponses> updateSurveyResponse(@RequestBody SurveyResponses request){
+        return this.service.updateSurveyResponse(request);
+    }
 }

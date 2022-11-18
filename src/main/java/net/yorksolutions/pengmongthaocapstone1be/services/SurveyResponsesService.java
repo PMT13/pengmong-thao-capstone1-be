@@ -39,4 +39,9 @@ public class SurveyResponsesService {
         this.repo.save(newSurveyResponses);
         return this.repo.findAll();
     }
+
+    public Iterable<SurveyResponses> updateSurveyResponse(SurveyResponses request) {
+        this.repo.save(request);
+        return this.repo.findAll();
+    }
 }
