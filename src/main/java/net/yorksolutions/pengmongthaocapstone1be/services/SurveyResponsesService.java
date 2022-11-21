@@ -11,7 +11,9 @@ import net.yorksolutions.pengmongthaocapstone1be.repositories.ResponseRepository
 import net.yorksolutions.pengmongthaocapstone1be.repositories.SurveyResponsesRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SurveyResponsesService {
@@ -41,7 +43,23 @@ public class SurveyResponsesService {
     }
 
     public Iterable<SurveyResponses> updateSurveyResponse(SurveyResponses request) {
-        this.repo.save(request);
+        SurveyResponses newSurveyResponses = new SurveyResponses(request.surveyId);
+
+        SurveyResponses oldSurveyResponses = this.repo.findById(request.getId()).orElseThrow();
+        this.repo.delete(oldSurveyResponses);
+        //        List<Response> oldResponseList = new ArrayList<Response>();
+//        for(Response oldResponse: oldSurveyResponses.getResponses()){
+//            oldResponseList.add(oldResponse);
+//        }
+//
+//        Set<Response> responseList = request.getResponses();
+//        int i = 0;
+        for(Response response: request.getResponses()){
+            Response newResponse = new Response(response.getResponse(), response.getResponseOrder());
+            this.responseRepo.save(newResponse);
+            newSurveyResponses.getResponses().add(newResponse);
+        }
+        this.repo.save(newSurveyResponses);
         return this.repo.findAll();
     }
 }
