@@ -77,4 +77,8 @@ public class SurveyService {
         this.repo.save(newSurvey);
         return this.repo.findAll();
     }
+
+    public Optional<Survey> getSurveyById(Long id) {
+        return this.repo.findById(id);
+    }
 }

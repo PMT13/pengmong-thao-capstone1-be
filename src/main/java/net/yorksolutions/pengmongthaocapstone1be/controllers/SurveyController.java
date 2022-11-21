@@ -23,6 +23,10 @@ public class SurveyController {
         return this.service.getAllSurveys();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Survey> getSurveyById(@PathVariable Long id){
+        return this.service.getSurveyById(id);
+    }
     @PostMapping
     public Iterable<Survey> addSurvey(@RequestBody AddSurveyDTO request){
         return this.service.addSurvey(request);
