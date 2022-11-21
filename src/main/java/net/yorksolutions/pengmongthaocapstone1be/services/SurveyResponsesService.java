@@ -47,13 +47,6 @@ public class SurveyResponsesService {
 
         SurveyResponses oldSurveyResponses = this.repo.findById(request.getId()).orElseThrow();
         this.repo.delete(oldSurveyResponses);
-        //        List<Response> oldResponseList = new ArrayList<Response>();
-//        for(Response oldResponse: oldSurveyResponses.getResponses()){
-//            oldResponseList.add(oldResponse);
-//        }
-//
-//        Set<Response> responseList = request.getResponses();
-//        int i = 0;
         for(Response response: request.getResponses()){
             Response newResponse = new Response(response.getResponse(), response.getResponseOrder());
             this.responseRepo.save(newResponse);
