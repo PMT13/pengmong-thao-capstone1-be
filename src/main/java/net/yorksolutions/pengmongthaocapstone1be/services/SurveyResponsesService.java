@@ -1,19 +1,15 @@
 package net.yorksolutions.pengmongthaocapstone1be.services;
 
-import net.yorksolutions.pengmongthaocapstone1be.dto.AddQuestionDTO;
 import net.yorksolutions.pengmongthaocapstone1be.dto.AddResponseDTO;
 import net.yorksolutions.pengmongthaocapstone1be.dto.AddSurveyResponsesDTO;
-import net.yorksolutions.pengmongthaocapstone1be.models.Question;
 import net.yorksolutions.pengmongthaocapstone1be.models.Response;
-import net.yorksolutions.pengmongthaocapstone1be.models.Survey;
 import net.yorksolutions.pengmongthaocapstone1be.models.SurveyResponses;
 import net.yorksolutions.pengmongthaocapstone1be.repositories.ResponseRepository;
 import net.yorksolutions.pengmongthaocapstone1be.repositories.SurveyResponsesRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class SurveyResponsesService {
@@ -47,6 +43,7 @@ public class SurveyResponsesService {
 
         SurveyResponses oldSurveyResponses = this.repo.findById(request.getId()).orElseThrow();
         this.repo.delete(oldSurveyResponses);
+
         for(Response response: request.getResponses()){
             Response newResponse = new Response(response.getResponse(), response.getResponseOrder());
             this.responseRepo.save(newResponse);
